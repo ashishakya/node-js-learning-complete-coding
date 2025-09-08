@@ -1,20 +1,26 @@
-// external module
-// const http = require("http");
 
-const requestHandler = require("./user")
 // external module
 const express = require("express");
 
 const app = express();
 
-app.use((req, res, next)=>{
+app.get("/", (req, res, next)=>{
     console.log("first middleware>>", req.url)
+    // res.send("<p>Welcome to first middleware</p>")
     next()
 })
-app.use((req, res, next)=>{
-    console.log("second middleware>>", req.url)
+
+app.post("/submit", (req, res, next)=>{
+    console.log("second middleware>>", req.url, req.method)
     res.send("<p>Welcome to express js</p>")
 })
+app.use("/", (req, res, next)=>{
+    console.log("came from another middleware>>", req.url)
+    res.send("<p>Welcome to another middleware</p>")
+    // next()
+})
+
+
 
 // const server = http.createServer(app);
 
