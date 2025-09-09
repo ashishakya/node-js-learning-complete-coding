@@ -1,30 +1,23 @@
+const path = require("path");
+
 const express = require("express");
 
-// const hostRouter = require("./routes/host")
 const userRouter = require("./routes/user");
 const hostRouter = require("./routes/host");
 
+const routeDir = require("./utils/pathUtils");
+
 const app = express();
 
-app.use((req, res, next)=>{
-    console.log(req.url, req.method);
-    next();
-})
-
 app.use(express.urlencoded({extended: true}));
+
 app.use(userRouter);
-app.use(hostRouter);
+app.use("/host",hostRouter);
 
-// app.get("/", (req, res, next)=>{
-//     res.send(`<h1>Hello from air bnb</h1>
-//         <a href="/host/add-home">Add Home</a>
-//         `)
-// })
-
-
-
-// app.use(hostRouter);
-// app.use(userRouter);
+app.use((req, res, next)=>{
+    res.status(404).sendFile(path.join(routeDir, "views/404.html"));
+    // res.status(404).send("<h1>404 Not Found!!</h1>");
+})
 
 const PORT = 3000;
 
