@@ -12,8 +12,8 @@ hostRouter.get("/add-home", (req, res, next)=>{
   //         <button type="submit">Add Home</button>
   //     </form>
   //     `)
-  // res.sendFile(path.join(__dirname, "../views/addHome.html"));
-  res.sendFile(path.join(routeDir, "views/addHome.html"));
+  // res.sendFile(path.join(__dirname, "../views/addHome.ejs"));
+  res.sendFile(path.join(routeDir, "views/addHome.ejs"));
 })
 
 hostRouter.post("/add-home", (req, res, next)=>{
@@ -21,7 +21,7 @@ hostRouter.post("/add-home", (req, res, next)=>{
   // res.send(`<h1>Successfully added home</h1>
   //     <a href="/host/add-home">Go to Home</a>
   //     `)
-  res.sendFile(path.join(__dirname, "../views/homeAdded.html"));
+  res.sendFile(path.join(__dirname, "../views/homeAdded.ejs"));
 
 })
 

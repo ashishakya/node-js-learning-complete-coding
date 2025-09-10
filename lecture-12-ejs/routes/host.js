@@ -13,16 +13,22 @@ hostRouter.get("/add-home", (req, res, next)=>{
   //     </form>
   //     `)
   // res.sendFile(path.join(__dirname, "../views/addHome.ejs"));
-  res.sendFile(path.join(routeDir, "views/addHome.ejs"));
+  // res.sendFile(path.join(routeDir, "views/addHome.ejs"));
+  res.render("addHome", {
+    pageTitle:"Add Home"
+  });
 })
+
+const registeredHomes = [];
 
 hostRouter.post("/add-home", (req, res, next)=>{
-  // console.log(req.body);
-  // res.send(`<h1>Successfully added home</h1>
-  //     <a href="/host/add-home">Go to Home</a>
-  //     `)
-  res.sendFile(path.join(__dirname, "../views/homeAdded.ejs"));
-
+  console.log("home registration successfully for:", req.body.name)
+  registeredHomes.push({name:req.body.name})
+  // res.sendFile(path.join(__dirname, "../views/homeAdded.ejs"));
+  res.render("homeAdded", {
+    pageTitle:"Home Added"
+  });
 })
 
-module.exports = hostRouter;
+exports.hostRouter = hostRouter;
+exports.registeredHomes = registeredHomes

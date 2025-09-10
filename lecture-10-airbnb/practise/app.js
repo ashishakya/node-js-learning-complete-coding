@@ -17,7 +17,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(contactUsRouter);
 
 app.use((req, res, next)=>{
-    res.status(404).sendFile(path.join(routeDir, "views/404.html"));
+    res.status(404).sendFile(path.join(routeDir, "views/404.ejs"));
 })
 
 const PORT = 3000;

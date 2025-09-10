@@ -8,8 +8,8 @@ userRouter.get("/", (req, res, next)=>{
   // res.send(`<h1>Hello from air bnb</h1>
   //     <a href="/host/add-home">Add Home</a>
   //     `)
-  // res.sendFile(path.join(__dirname, "../views/home.html"));
-  res.sendFile(path.join(routeDir, "views/home.html"));
+  // res.sendFile(path.join(__dirname, "../views/home.ejs"));
+  res.sendFile(path.join(routeDir, "views/home.ejs"));
 })
 
 module.exports = userRouter;
