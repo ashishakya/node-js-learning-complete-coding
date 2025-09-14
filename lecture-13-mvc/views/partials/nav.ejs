@@ -1,0 +1,15 @@
+<header>
+    Selected Page :: <%=currentPage%>
+    <ul class="flex space-x-4">
+        <li>
+            <a href="/" class="<%= currentPage === 'home' ? 'active' : '' %>">
+                Go to Home
+            </a>
+        </li>
+        <li>
+            <a href="/host/add-home" class="<%= currentPage === 'add-home' ? 'active' : '' %>">
+                Add Home
+            </a>
+        </li>
+    </ul>
+</header>
