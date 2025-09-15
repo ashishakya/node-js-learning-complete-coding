@@ -1,0 +1,36 @@
+<header>
+    Selected Page :: <%=currentPage%>
+    <ul class="flex space-x-4">
+        <li>
+            <a href="/" class="<%= currentPage === 'index' ? 'active' : '' %>">
+                Air BnB
+            </a>
+        </li>
+        <li>
+            <a href="/homes" class="<%= currentPage === 'home' ? 'active' : '' %>">
+                Home List
+            </a>
+        </li>
+        <li>
+                <a href="/favourites" class="<%= currentPage === 'favourites' ? 'active' : '' %>">
+                    Favourites
+                </a>
+        </li>
+        <li>
+            <a href="/bookings" class="<%= currentPage === 'bookings' ? 'active' : '' %>">
+                Bookings
+            </a>
+        </li>
+
+       <li>
+            <a href="/host/host-homes" class="<%= currentPage === 'host-homes' ? 'active' : '' %>">
+                Host Homes
+            </a>
+        </li>
+        <li>
+            <a href="/host/add-home" class="<%= currentPage === 'add-home' ? 'active' : '' %>">
+                Add Home
+            </a>
+        </li>
+    </ul>
+</header>

@@ -1,0 +1,18 @@
+<%- include("../partials/head") %>
+</head>
+<body>
+<%- include("../partials/nav") %>
+<main>
+  <h2 class="text-red-700 text-5xl" >Here are our host Homes</h2>
+    <ul>
+      <% registeredHomes.forEach(home=>{ %>
+          <li>
+              <%= home.name %> (<%= home.rent %>)
+              <button class="bg-green-300 p-2">Edit</button>
+              <button class="bg-green-300 p-2">Delete</button>
+          </li>
+      <%})%>
+    </ul>
+</main>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<%- include("../partials/head") %>
+</head>
+<body>
+<%- include("../partials/nav") %>
+<main>
+  <h1 class="text-red-700 text-5xl" >Welcome to airbnb</h1>
+
+  <h2 class="text-red-700 text-5xl" >Here are our registered Homes</h2>
+    <ul>
+      <% registeredHomes.forEach(home=>{ %>
+          <li>
+              <%= home.name %> (<%= home.rent %>)
+              <button class="bg-green-300 p-2">Book</button>
+          </li>
+      <%})%>
+    </ul>
+</main>
+</body>
+</html>
