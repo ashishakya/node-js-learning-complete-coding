@@ -39,10 +39,16 @@ exports.getFavouriteList = (req, res, next) => {
 
 exports.getHomeDetail = (req, res, next) => {
     const homeId = req.params.homeId
-    console.log("home id is::", homeId);
-
-    res.render("store/home-detail", {
-        pageTitle: "Homes Detail",
-        currentPage: "Home",
-    })
+    // console.log("home id is::", homeId);
+     Home.findById(homeId, home=>{
+         if(!home){
+             res.redirect("/homes");
+         }else{
+             res.render("store/home-detail", {
+                 pageTitle: "Homes Detail",
+                 currentPage: "Home",
+                 home
+             })
+         }
+    });
 };
