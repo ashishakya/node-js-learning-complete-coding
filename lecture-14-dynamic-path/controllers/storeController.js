@@ -1,4 +1,5 @@
 const Home = require("../models/home");
+const Favourite = require("../models/favourite")
 
 exports.getIndex = (req, res, next) => {
   Home.fetchAll((registeredHomes) =>
@@ -28,13 +29,20 @@ exports.getBookings = (req, res, next) => {
 };
 
 exports.getFavouriteList = (req, res, next) => {
-  Home.fetchAll((registeredHomes) =>
-    res.render("store/favourite-list", {
-      registeredHomes: registeredHomes,
-      pageTitle: "My Favourites",
-      currentPage: "favourites",
-    })
-  );
+    Favourite.getFavourites(favouriteIds=>{
+        Home.fetchAll((registeredHomes) =>
+            {
+                const favouriteHomes = registeredHomes.filter(registeredHome=>favouriteIds.includes(String(registeredHome.id)))
+
+                res.render("store/favourite-list", {
+                    registeredHomes: favouriteHomes,
+                    pageTitle: "My Favourites",
+                    currentPage: "favourites",
+                })
+            }
+        );
+    });
+
 };
 
 exports.getHomeDetail = (req, res, next) => {
@@ -52,3 +60,12 @@ exports.getHomeDetail = (req, res, next) => {
          }
     });
 };
+
+exports.postAddToFavourite = (req, res, next)=>{
+    Favourite.addToFavourite(req.body.id, error=>{
+        if(error){
+            console.log("Error while marking error");
+        }
+    })
+    res.redirect("/favourites");
+}
