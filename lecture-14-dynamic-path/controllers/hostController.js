@@ -46,6 +46,18 @@ exports.editHostHome = (req, res, next) => {
 };
 
 exports.updateHostHome=(req, res, next)=>{
-  console.log("updated value>>>>", req.body)
-  res.send("updatedd");
+  // console.log("updated value>>>>", req.body)
+  // res.send("updatedd");
+
+  const {id, houseName, price, location, rating, photoUrl } = req.body;
+  const home = new Home(houseName, price, location, rating, photoUrl);
+  home.id = id;
+  home.save();
+
+  return res.redirect("/host/host-home-list");
+
+  // res.render("host/host-home-list", {
+  //   pageTitle: "Home Updated Successfully",
+  //   currentPage: "homeAdded",
+  // });
 }
