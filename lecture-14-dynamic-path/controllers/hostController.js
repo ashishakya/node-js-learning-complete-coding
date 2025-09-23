@@ -61,3 +61,10 @@ exports.updateHostHome=(req, res, next)=>{
   //   currentPage: "homeAdded",
   // });
 }
+
+exports.deleteHostHome=(req, res, next)=>{
+  const homeId = req.params.homeId;
+  console.log("deletedd>>>>", homeId);
+
+  return res.redirect("/host/host-home-list");
+}
