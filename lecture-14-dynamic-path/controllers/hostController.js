@@ -27,3 +27,25 @@ exports.postAddHome = (req, res, next) => {
     currentPage: "homeAdded",
   });
 };
+
+exports.editHostHome = (req, res, next) => {
+  const homeId = req.params.homeId;
+  const editing = req.query.editing === "true";
+
+  Home.findById(homeId, home=>{
+    if(!home){
+      return res.redirect("/host/host-home-list");
+    }
+    res.render("host/edit-home", {
+      pageTitle: "Edit Home to airbnb",
+      currentPage: "addHome",
+      editing,
+      home
+    });
+  })
+};
+
+exports.updateHostHome=(req, res, next)=>{
+  console.log("updated value>>>>", req.body)
+  res.send("updatedd");
+}
