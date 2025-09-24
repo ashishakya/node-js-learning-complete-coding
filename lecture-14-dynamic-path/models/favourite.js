@@ -24,4 +24,11 @@ module.exports = class Favourite {
       callback(!err ? JSON.parse(data) : []);
     });
   }
+
+  static deleteById(homeId, callback){
+    this.getFavourites(favouriteHomeIds => {
+      const homesIds = favouriteHomeIds.filter(favouriteHomeId=>favouriteHomeId != homeId)
+      fs.writeFile(favouriteDataPath, JSON.stringify(homesIds), callback);
+    });
+  }
 }
