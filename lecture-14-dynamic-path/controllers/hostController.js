@@ -64,7 +64,11 @@ exports.updateHostHome=(req, res, next)=>{
 
 exports.deleteHostHome=(req, res, next)=>{
   const homeId = req.params.homeId;
-  console.log("deletedd>>>>", homeId);
+  Home.deleteById(homeId, error=>{
+    if(error){
+      console.log("error while deleting host home", error)
+    }
+  });
 
   return res.redirect("/host/host-home-list");
 }

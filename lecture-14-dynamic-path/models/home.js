@@ -44,4 +44,12 @@ module.exports = class Home {
       const home = homeList.find(home=>home.id == homeId)
       callback(home);
     });
-  }};
+  }
+
+  static deleteById(homeId, callback){
+    this.fetchAll(homeList => {
+      const homes = homeList.filter(home=>home.id != homeId)
+      fs.writeFile(homeDataPath, JSON.stringify(homes), callback);
+    });
+  }
+};
