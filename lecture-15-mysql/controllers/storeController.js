@@ -2,23 +2,27 @@ const Home = require("../models/home");
 const Favourite = require("../models/favourite")
 
 exports.getIndex = (req, res, next) => {
-  Home.fetchAll((registeredHomes) =>
-    res.render("store/index", {
-      registeredHomes: registeredHomes,
-      pageTitle: "airbnb Home",
-      currentPage: "index",
-    })
-  );
+  Home.fetchAll().then(([registeredHomes, fields])=>{
+      res.render("store/home-list", {
+          registeredHomes: registeredHomes,
+          pageTitle: "Homes List",
+          currentPage: "Home",
+      })
+  }).catch(error=>{
+      console.log("Error while reading homes", error)
+  })
 };
 
 exports.getHomes = (req, res, next) => {
-  Home.fetchAll((registeredHomes) =>
-    res.render("store/home-list", {
-      registeredHomes: registeredHomes,
-      pageTitle: "Homes List",
-      currentPage: "Home",
+    Home.fetchAll().then(([registeredHomes, fields])=>{
+        res.render("store/home-list", {
+            registeredHomes: registeredHomes,
+            pageTitle: "Homes List",
+            currentPage: "Home",
+        })
+    }).catch(error=>{
+        console.log("Error while reading homes", error)
     })
-  );
 };
 
 exports.getBookings = (req, res, next) => {
@@ -30,7 +34,7 @@ exports.getBookings = (req, res, next) => {
 
 exports.getFavouriteList = (req, res, next) => {
     Favourite.getFavourites(favouriteIds=>{
-        Home.fetchAll((registeredHomes) =>
+        Home.fetchAll().then(([registeredHomes]) =>
             {
                 const favouriteHomes = registeredHomes.filter(registeredHome=>favouriteIds.includes(String(registeredHome.id)))
 

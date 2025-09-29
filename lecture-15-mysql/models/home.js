@@ -1,9 +1,10 @@
 // Core Modules
 const fs = require("fs");
-const path = require("path");
-const rootDir = require("../utils/pathUtil");
+// const path = require("path");
+// const rootDir = require("../utils/pathUtil");
 
-const homeDataPath = path.join(rootDir, "data", "homes.json");
+// const homeDataPath = path.join(rootDir, "data", "homes.json");
+const db = require("./../utils/database");
 
 module.exports = class Home {
   constructor(houseName, price, location, rating, photoUrl) {
@@ -34,16 +35,17 @@ module.exports = class Home {
   }
 
   static fetchAll(callback) {
-    fs.readFile(homeDataPath, (err, data) => {
-      callback(!err ? JSON.parse(data) : []);
-    });
+    return db.execute("SELECT * from homes");
+    // fs.readFile(homeDataPath, (err, data) => {
+    //   callback(!err ? JSON.parse(data) : []);
+    // });
   }
 
   static findById(homeId, callback) {
-    this.fetchAll(homeList => {
-      const home = homeList.find(home=>home.id == homeId)
-      callback(home);
-    });
+    // this.fetchAll(homeList => {
+    //   const home = homeList.find(home=>home.id == homeId)
+    //   callback(home);
+    // });
   }
 
   static deleteById(homeId, callback){

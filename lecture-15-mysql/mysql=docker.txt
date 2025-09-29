@@ -14,3 +14,7 @@ Add property in advance
 | ------------------------- | ------- |
 | `allowPublicKeyRetrieval` | `true`  |
 | `useSSL`                  | `false` |
+
+----------------------------------------------
+docker start mysql-container
+
