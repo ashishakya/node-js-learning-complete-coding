@@ -20,8 +20,8 @@ const getDB = ()=>{
     }
     return _db;
 }
-module.exports = mongoConnect;
-module.getDB = getDB;
+exports.mongoConnect = mongoConnect;
+exports.getDB = getDB;
 // MongoClient.connect(MONGO_URL).then(client=>{
 //     console.log(client)
 //     return client;
