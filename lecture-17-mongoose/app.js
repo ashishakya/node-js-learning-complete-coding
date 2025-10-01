@@ -26,7 +26,7 @@ app.use(errorsController.pageNotFound);
 
 const PORT = 3001;
 
-mongoose.connect("mongodb+srv://root:mypassword@ashishakyalearning.pmg8uee.mongodb.net/aitbnb?retryWrites=true&w=majority&appName=ashishakyaLearning")
+mongoose.connect("mongodb+srv://root:mypassword@ashishakyalearning.pmg8uee.mongodb.net/airbnb?retryWrites=true&w=majority&appName=ashishakyaLearning")
         .then(()=>{
   console.log("mongoose connected");
   app.listen(PORT, () => {

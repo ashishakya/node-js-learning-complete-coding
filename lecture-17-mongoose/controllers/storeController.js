@@ -2,11 +2,11 @@ const Home = require("../models/home");
 const Favourite = require("../models/favourite")
 
 exports.getIndex = (req, res, next) => {
-  Home.fetchAll().then((registeredHomes)=>{
+  Home.find().then((registeredHomes)=>{
       res.render("store/home-list", {
           registeredHomes: registeredHomes,
           pageTitle: "Homes List",
-          currentPage: "Home",
+          currentPage: "index",
       })
   }).catch(error=>{
       console.log("Error while reading homes", error)
@@ -14,7 +14,7 @@ exports.getIndex = (req, res, next) => {
 };
 
 exports.getHomes = (req, res, next) => {
-    Home.fetchAll().then((registeredHomes)=>{
+    Home.find().then((registeredHomes)=>{
         res.render("store/home-list", {
             registeredHomes: registeredHomes,
             pageTitle: "Homes List",
@@ -35,7 +35,7 @@ exports.getBookings = (req, res, next) => {
 exports.getFavouriteList = (req, res, next) => {
     Favourite.getFavourites().then(favourites=>{
         favouriteIds = favourites.map(fav=>fav.houseId);
-        Home.fetchAll().then(registeredHomes =>
+        Home.find().then(registeredHomes =>
             {
                 const favouriteHomes = registeredHomes.filter(registeredHome=>favouriteIds.includes(String(registeredHome._id)))
 

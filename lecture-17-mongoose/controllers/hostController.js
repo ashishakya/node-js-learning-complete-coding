@@ -8,7 +8,7 @@ exports.getAddHome = (req, res, next) => {
 };
 
 exports.getHostHomes = (req, res, next) => {
-  Home.fetchAll().then((registeredHomes) =>
+  Home.find().then((registeredHomes) =>
     res.render("host/host-home-list", {
       registeredHomes: registeredHomes,
       pageTitle: "Host Homes List",
@@ -19,8 +19,9 @@ exports.getHostHomes = (req, res, next) => {
 
 exports.postAddHome = (req, res, next) => {
   const { houseName, price, location, rating, photoUrl , description} = req.body;
-  const home = new Home(houseName, price, location, rating, photoUrl, description);
+  const home = new Home({houseName, price, location, rating, photoUrl, description});
   home.save().then(()=>{
+    console.log("**** home added successfully ****")
     res.render("host/home-added", {
       pageTitle: "Home Added Successfully",
       currentPage: "homeAdded",
@@ -47,15 +48,27 @@ exports.editHostHome = (req, res, next) => {
 
 exports.updateHostHome=(req, res, next)=>{
   const {id, houseName, price, location, rating, photoUrl, description } = req.body;
-  const home = new Home(houseName, price, location, rating, photoUrl, description, id);
-  home.save().then(result=>{
-    return res.redirect("/host/host-home-list");
+  Home.findById(id).then((home)=>{
+    home.houseName=houseName
+    home.price=price
+    home.location=location
+    home.rating=rating
+    home.photoUrl=photoUrl
+    home.description=description
+    home.save().then((result)=>{
+      console.log("home is updated");
+      return res.redirect("/host/host-home-list");
+    })
   });
+  // const home = new Home(houseName, price, location, rating, photoUrl, description, id);
+  // home.save().then(result=>{
+  //   return res.redirect("/host/host-home-list");
+  // });
 }
 
 exports.deleteHostHome=(req, res, next)=>{
   const homeId = req.params.homeId;
-  Home.deleteById(homeId).then(()=>{
+  Home.findByIdAndDelete(homeId).then(()=>{
     return res.redirect("/host/host-home-list");
   }).catch(error=>{
       console.log("error while deleting host home", error)
