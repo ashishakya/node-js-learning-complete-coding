@@ -1,0 +1,20 @@
+docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=yourpassword -p 3306:3306 -d mysql:latest
+
+| Field        | Value                                                |
+| ------------ | ---------------------------------------------------- |
+| **Host**     | `localhost`                                          |
+| **Port**     | `3306`                                               |
+| **User**     | `root`                                               |
+| **Password** | `secret` (same as what you set in Docker)      |
+| **Database** | Optional — leave blank or set it to a DB like `test` |
+
+
+Add property in advance
+| Property                  | Value   |
+| ------------------------- | ------- |
+| `allowPublicKeyRetrieval` | `true`  |
+| `useSSL`                  | `false` |
+
+----------------------------------------------
+docker start mysql-container
+
