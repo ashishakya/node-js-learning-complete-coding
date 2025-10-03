@@ -20,6 +20,13 @@ app.set('views', 'views');
 
 app.use(express.urlencoded());
 app.use(storeRouter);
+app.use("/host", (req, res,  next)=>{
+  if(req.isLoggedIn){
+    next()
+  }else{
+    res.redirect("/login");
+  }
+});
 app.use("/host", hostRouter);
 app.use(authRouter);
 
