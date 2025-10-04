@@ -3,6 +3,8 @@ const path = require('path');
 
 // External Module
 const express = require('express');
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
 
 //Local Module
 const storeRouter = require("./routes/storeRouter")
@@ -15,12 +17,29 @@ const mongoose = require("mongoose");
 
 const app = express();
 
+const MONGO_DB_URL =  "mongodb+srv://root:mypassword@ashishakyalearning.pmg8uee.mongodb.net/airbnb?retryWrites=true&w=majority&appName=ashishakyaLearning";
+
+
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 app.use(express.urlencoded());
+
+const store = new MongoDBStore({
+  uri:MONGO_DB_URL,
+  collection: "sessions"
+})
+
+app.use(session({
+  secret:"learning node js stack",
+  resave:false,
+  saveUninitialized: true,
+  store
+}))
+
 app.use((req, res, next)=>{
-  req.isLoggedIn = req.get("Cookie") ?req.get("Cookie").split("=")[1] ==="true" : false ;
+  // req.isLoggedIn = req.get("Cookie") ?req.get("Cookie").split("=")[1] ==="true" : false ;
+  req.isLoggedIn = req.session.isLoggedIn || false ;
   next()
 })
 app.use(storeRouter);
@@ -40,7 +59,7 @@ app.use(errorsController.pageNotFound);
 
 const PORT = 3001;
 
-mongoose.connect("mongodb+srv://root:mypassword@ashishakyalearning.pmg8uee.mongodb.net/airbnb?retryWrites=true&w=majority&appName=ashishakyaLearning")
+mongoose.connect(MONGO_DB_URL)
         .then(()=>{
   console.log("mongoose connected");
   app.listen(PORT, () => {
