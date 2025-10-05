@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const Favourite = require("./favourite")
+// const Favourite = require("./favourite")
 
 const homeSchema = mongoose.Schema({
   houseName : {type:String, required:true},
@@ -10,11 +10,11 @@ const homeSchema = mongoose.Schema({
   description : {type: String},
 });
 
-homeSchema.pre("findOneAndDelete", async function(next){
-  console.log("came to pre hook while deleting a home");
-  const homeId = this.getQuery()._id;
-  await Favourite.deleteMany({houseId: homeId});
-  next();
-})
+// homeSchema.pre("findOneAndDelete", async function(next){
+//   console.log("came to pre hook while deleting a home");
+//   const homeId = this.getQuery()._id;
+//   await Favourite.deleteMany({houseId: homeId});
+//   next();
+// })
 
 module.exports = mongoose.model("Home", homeSchema) // returns class Home that represents homeSchema
