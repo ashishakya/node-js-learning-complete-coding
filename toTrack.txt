@@ -1,3 +1,4 @@
 * [ ] mongoose functions
 * [ ] login controller optimisation
 * [ ] last chapters packages overview
+* [ ] optimise routes from app.js
