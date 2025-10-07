@@ -2,3 +2,4 @@
 * [ ] login controller optimisation
 * [ ] last chapters packages overview
 * [ ] optimise routes from app.js
+* [ ] allow images to be access from any prefix

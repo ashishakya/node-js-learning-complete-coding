@@ -53,6 +53,7 @@ app.use(multer(multerOptions).single("photo"))
 app.use(express.static(path.join(rootDir, 'public')))
 app.use("/uploads", express.static(path.join(rootDir, 'uploads')))
 app.use("/host/uploads", express.static(path.join(rootDir, 'uploads')))
+app.use("/homes/uploads", express.static(path.join(rootDir, 'uploads')))
 
 const store = new MongoDBStore({
   uri:MONGO_DB_URL,
