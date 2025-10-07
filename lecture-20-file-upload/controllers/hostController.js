@@ -22,9 +22,20 @@ exports.getHostHomes = (req, res, next) => {
 };
 
 exports.postAddHome = (req, res, next) => {
-  const { houseName, price, location, rating, photo , description} = req.body;
+  const { houseName, price, location, rating , description} = req.body;
 
-  const home = new Home({houseName, price, location, rating, photo, description});
+  if(!req.file){
+    return res.status(400).send("no image provided")
+  }
+
+  const home = new Home({
+    houseName,
+    price,
+    location,
+    rating,
+    photo:req.file.path,
+    description
+  });
   home.save().then(()=>{
     console.log("**** home added successfully ****")
     res.render("host/home-added", {
@@ -56,14 +67,16 @@ exports.editHostHome = (req, res, next) => {
 };
 
 exports.updateHostHome=(req, res, next)=>{
-  const {id, houseName, price, location, rating, photo, description } = req.body;
+  const {id, houseName, price, location, rating, description } = req.body;
   Home.findById(id).then((home)=>{
     home.houseName=houseName
     home.price=price
     home.location=location
     home.rating=rating
-    home.photo=photo
     home.description=description
+    if(req.file){
+      home.photo=req.file.path
+    }
     home.save().then((result)=>{
       console.log("home is updated");
       return res.redirect("/host/host-home-list");

@@ -34,12 +34,25 @@ const storage =multer.diskStorage({
         cb(null, new Date().toISOString() + '-' + file.originalname);
     }
 })
-const multerOptions={
-  storage
+
+const fileFilter = (req, file, cb)=>{
+    console.log("mime>>", file.mimeType)
+    if (file.mimeType ==="image/png" || file.mimeType === "image/jpg" || file.mimeType === "image/jpeg" ){
+        cb(null, true)
+    }else{
+        cb(null, false)
+    }
+ }
+
+const multerOptions= {
+  storage,
+    // fileFilter
 }
 app.use(express.urlencoded());
 app.use(multer(multerOptions).single("photo"))
 app.use(express.static(path.join(rootDir, 'public')))
+app.use("/uploads", express.static(path.join(rootDir, 'uploads')))
+app.use("/host/uploads", express.static(path.join(rootDir, 'uploads')))
 
 const store = new MongoDBStore({
   uri:MONGO_DB_URL,
