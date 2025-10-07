@@ -24,8 +24,18 @@ const MONGO_DB_URL =  "mongodb+srv://root:mypassword@ashishakyalearning.pmg8uee.
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
+
+const storage =multer.diskStorage({
+    destination: (req, file, cb) =>{
+        // cb(null, path.join(rootDir, "public", "images"))
+        cb(null, "uploads/")
+    },
+    filename: (req, file, cb)=>{
+        cb(null, new Date().toISOString() + '-' + file.originalname);
+    }
+})
 const multerOptions={
-  dest:"uploads/",
+  storage
 }
 app.use(express.urlencoded());
 app.use(multer(multerOptions).single("photo"))
