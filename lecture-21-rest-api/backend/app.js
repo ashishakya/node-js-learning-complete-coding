@@ -3,6 +3,7 @@ const path = require('path');
 
 // External Module
 const express = require('express');
+const cors = require('cors');
 
 //Local Module
 const mongoose = require("mongoose");
@@ -17,11 +18,13 @@ const MONGO_DB_URL =  "mongodb+srv://root:mypassword@ashishakyalearning.pmg8uee.
 
 app.use(express.urlencoded());
 app.use(express.static(path.join(rootDir, 'public')))
+app.use(express.json());
+app.use(cors());
 
 app.use("/api/todo", todoItemRouter)
 app.use(errorsController.pageNotFound);
 
-const PORT = 3001;
+const PORT = 1234;
 
 mongoose.connect(MONGO_DB_URL)
         .then(()=>{

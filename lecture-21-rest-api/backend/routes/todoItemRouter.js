@@ -5,6 +5,9 @@ const todoItemRouter = express.Router();
 // Local Module
 const todoItemController = require("../controllers/todoItemController");
 
-todoItemRouter.get("/", todoItemController.createTodoItem);
+todoItemRouter.post("/", todoItemController.createTodoItem);
+todoItemRouter.get("/", todoItemController.fetchAllTodoItems);
+todoItemRouter.delete("/:id", todoItemController.deleteTodoItems);
+todoItemRouter.post("/:id/mark-as-completed", todoItemController.markAsCompleted);
 
 module.exports = todoItemRouter;
